@@ -7,6 +7,7 @@ import hangman.validations as validations
 from config.db import DB
 from config.api import WordApi
 
+
 app = Flask(__name__)  # referencing current file
 CORS(app)
 
@@ -16,6 +17,7 @@ crud_methods = ['GET', 'POST']
 Word = db_instance.models['word']
 WORD = WordApi.get_word()
 print(WORD)
+# hola
 
 
 GAME_DATA = init_game_data(WORD)
@@ -28,13 +30,21 @@ def index():
     global WORD
     if request.method == 'POST':
         req = request.form
+        print(GAME_DATA['tries'])
+        GAME_DATA['tries'] = GAME_DATA['tries'] + 1
         # TODO handle game logic functionality different
         # handle different scenarios
         # handle errors
         # handle tries
+        #if (utils.valid)
         input = req['letter']
+        #
+        GAME_DATA['indexes'] = utils.findIndexes(input, WORD)
+
         print(input)
-        # Word.add_word(input, redirect('/'))
+        # if input in GAME_DATA['letters']:
+
+        Word.add_word(input, redirect('/'))
         return redirect('/')
     else:
         GAME_DATA['words'] = Word.get_played_words()
@@ -44,11 +54,16 @@ def index():
             game=GAME_DATA)
 
 
+
 @app.route('/restart', methods=['GET'])
 def restart():
-    # TODO make restart functionality
-    print('estoy en restart')
+    global WORD, GAME_DATA
+    WORD= WordApi.get_word()
+    GAME_DATA = init_game_data(WORD)
     return redirect('/')
+    print('estoy en restart')
+
+
 
 if __name__ == '__main__':
     db_instance.init_db()
