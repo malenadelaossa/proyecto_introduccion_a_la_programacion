@@ -77,8 +77,6 @@ def index():
             instructions=constants.INSTRUCTIONS,
             game=GAME_DATA)
 
-
-
 @app.route('/restart', methods=['GET'])
 def restart():
     global WORD, GAME_DATA
@@ -86,8 +84,6 @@ def restart():
     GAME_DATA = init_game_data(WORD)
     return redirect('/')
     print('estoy en restart')
-
-
 
 if __name__ == '__main__':
     db_instance.init_db()
