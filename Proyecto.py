@@ -30,9 +30,11 @@ def index():
     global WORD
     if request.method == 'POST':
         req = request.form
-        game_finished= utils.game_over (
+        input= utils.word_to_uppercase (req['letter'])
+        game_finished= utils.game_over(
             GAME_DATA ['letters'], GAME_DATA ['tries'])
-    #
+    if(not game_finished and validations.valid_letter(input)
+        find_indexes= utils.find_indexes_in_string (input, GAME_DATA ['word'])
     if (find_indexes):
         GAME_DATA ['letters'] = utils.update_letter(
             GAME_DATA ['letters'], find_indexes)
@@ -52,30 +54,30 @@ def index():
             'index.html',
             intructions= constants.INSTRUCTIONS,
             game=GAME_DATA)
-
-
-        print(GAME_DATA['tries'])
-        GAME_DATA['tries'] = GAME_DATA['tries'] + 1
-        # TODO handle game logic functionality different
-        # handle different scenarios
-        # handle errors
-        # handle tries
-        #if (utils.valid)
-        input = req['letter']
-        #
-        GAME_DATA['indexes'] = utils.findIndexes(input, WORD)
-
-        print(input)
-        # if input in GAME_DATA['letters']:
-
-        Word.add_word(input, redirect('/'))
-        return redirect('/')
-    else:
-        GAME_DATA['words'] = Word.get_played_words()
-        return render_template(
-            'index.html',
-            instructions=constants.INSTRUCTIONS,
-            game=GAME_DATA)
+    #
+    #
+    #     print(GAME_DATA['tries'])
+    #     GAME_DATA['tries'] = GAME_DATA['tries'] + 1
+    #     # TODO handle game logic functionality different
+    #     # handle different scenarios
+    #     # handle errors
+    #     # handle tries
+    #     #if (utils.valid)
+    #     input = req['letter']
+    #     #
+    #     GAME_DATA['indexes'] = utils.find_indexes(input, WORD)
+    #
+    #     print(input)
+    #     # if input in GAME_DATA['letters']:
+    #
+    #     Word.add_word(input, redirect('/'))
+    #     return redirect('/')
+    # else:
+    #     GAME_DATA['words'] = Word.get_played_words()
+    #     return render_template(
+    #         'index.html',
+    #         instructions=constants.INSTRUCTIONS,
+    #         game=GAME_DATA)
 
 @app.route('/restart', methods=['GET'])
 def restart():
