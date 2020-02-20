@@ -14,7 +14,7 @@
       <h1>Cantidad de Intentos {{ game.tries }}</h1>
     <!-- TODO display win or lose message when game is over -->
     <div class="word marginSpace">
-        {% for index, letter in enumerate(game.letters) %}
+        {% if index, letter in game.letters %}
           <span>{{letter}}</span>
         {% endfor %}
     </div>
@@ -23,9 +23,9 @@
         <input type="text" name="letter" id="letter" placeholder="Digíte una letra" />
         <button type="submit">Enviar</button>
     </form>
-   <!-- Todo show restart game just when game is over -->
-
-        <button onclick="restartGame()">Volver a jugar</button>
+    {% if game.utils.gameOver (game.letters, game.tries) %}
+    <button onclick="restartGame()">Volver a jugar</button>
+    {% endif %}
 
 
     <!-- Todo display game errors in a list -->
@@ -35,7 +35,9 @@
     <!-- Todo display played words -->
 
     <div class="wordsContainer centered">
-            <h2 class="uppercase"></h2>
+            <h2 class="uppercase">
+                Palabras jugadas
+            </h2>
             <ul class="wordList">
             {% for word in game['words'] %}
                 <li>{{ word['word'] }}</li>

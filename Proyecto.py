@@ -17,7 +17,7 @@ crud_methods = ['GET', 'POST']
 Word = db_instance.models['word']
 WORD = WordApi.get_word()
 print(WORD)
-# hola
+
 
 
 GAME_DATA = init_game_data(WORD)
@@ -30,6 +30,27 @@ def index():
     global WORD
     if request.method == 'POST':
         req = request.form
+        game_finished= utils.game_over (
+            GAME_DATA ['letters'], GAME_DATA ['tries'])
+    #
+    if (find_indexes):
+        GAME_DATA ['letters'] = utils.update_letter(
+            GAME_DATA ['letters'], find_indexes)
+        game_finished= utils.game_over(
+            GAME_DATA ['letters'], GAME_DATA ['tries'])
+        if game_finished:
+            word.add_word(WORD, redirect('/'))
+        elif (GAME_DATA['tries'] <= constants.MAX_TRIES):
+            GAME_DATA['tries'] +=1
+    else:
+        GAME_DATA ['words']= Word.get_played_words()
+        GAME_DATA ['words'] = Word.get_played_words()
+        return render_template(
+            'index.html',
+            intructions= constants.INSTRUCTIONS,
+            game=GAME_DATA)
+
+
         print(GAME_DATA['tries'])
         GAME_DATA['tries'] = GAME_DATA['tries'] + 1
         # TODO handle game logic functionality different
