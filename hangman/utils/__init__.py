@@ -1,7 +1,8 @@
 def game_over():
     return game_lose(tries) or game_won(letters)
 
-
+def show_part (part, counter):
+    return part <= counter
 
 def game_lose(tries):
     return tries== constants.MAX_TRIES

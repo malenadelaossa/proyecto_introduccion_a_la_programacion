@@ -10,7 +10,8 @@ def init_game_data(word):
         'word': word,
         'utils': {
             'gameOver': utils.game_over,
-            'gameLose': utils.game_lose
+            'gameLose': utils.game_lose,
+            'showPart': utils.show_part
         },
         'display': constants.DISPLAY_MSG,
         'letters': "_" * len(word),
