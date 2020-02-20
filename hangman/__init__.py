@@ -6,7 +6,6 @@ import hangman.utils as utils
 def init_game_data(word):
     return {
         'errors': [],
-        'letters': [None] * len(word),
         'tries': 0,
         'word': word,
         'utils': {
@@ -14,4 +13,8 @@ def init_game_data(word):
             'gameLose': utils.game_lose
         },
         'display': constants.DISPLAY_MSG,
+        'letters': "_" * len(word),
+        'indexes': None
+        # _ _ _ _
+
     }
