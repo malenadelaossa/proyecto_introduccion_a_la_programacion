@@ -43,6 +43,9 @@ def index():
         elif (GAME_DATA['tries'] <= constants.MAX_TRIES):
             GAME_DATA['tries'] +=1
     else:
+        GAME_DATA ['errors']. append('digite una letra válida')
+        return redirect ('/')
+    else:
         GAME_DATA ['words']= Word.get_played_words()
         GAME_DATA ['words'] = Word.get_played_words()
         return render_template(
