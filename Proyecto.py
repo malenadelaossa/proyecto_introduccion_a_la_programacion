@@ -33,8 +33,15 @@ def index():
         game_finished= utils.game_over (
             GAME_DATA ['letters'], GAME_DATA ['tries'])
     #
-    if (find_indexes) = utils.find-indexes_in_string ( input, GAME DATA ['word'])
-
+    if (find_indexes):
+        GAME_DATA ['letters'] = utils.update_letter(
+            GAME_DATA ['letters'], find_indexes)
+        game_finished= utils.game_over(
+            GAME_DATA ['letters'], GAME_DATA ['tries'])
+        if game_finished:
+            word.add_word(WORD, redirect('/'))
+        elif (GAME_DATA['tries'] <= constants.MAX_TRIES):
+            GAME_DATA['tries'] +=1
     else:
         GAME_DATA ['words']= Word.get_played_words()
         GAME_DATA ['words'] = Word.get_played_words()
